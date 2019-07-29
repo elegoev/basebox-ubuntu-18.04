@@ -49,10 +49,9 @@ CLOUDCURRENTVERSION=$(vagrant cloud box show $CLOUDNAMESPACE/$BASEBOXNAME | grep
 echo "CLOUDCURRENTVERSION = $CLOUDCURRENTVERSION"
 METADATABUILD="$(echo $CLOUDCURRENTVERSION | cut -d'-' -f 2)"
 echo "METADATABUILD = $METADATABUILD"
-echo "Build = $BOXBUILD"
+echo "ACTUALBUILD   = $BOXBUILD"
 
 if [ "$BOXBUILD" == "$METADATABUILD" ]; then
-  echo "METADATABUILD:                $METADATABUILD"
   echo -e "${RED}>>>> Image for build $BOXBUILD already deployed${NC}"
   exit 1
 else
