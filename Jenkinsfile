@@ -5,7 +5,7 @@ pipeline {
       steps {
         echo 'Build vagrant base boxes ubuntu-18.04'
         sh '   pwd'
-        sh 'cat create-vagrant-box.sh  | bash'
+        sh 'curl -sfL https://raw.githubusercontent.com/elegoev/vagrant-ubuntu-18.04/master/jenkins/scripts/create-vagrant-box.sh | bash '
         cleanWs(deleteDirs: true)
       }
     }
