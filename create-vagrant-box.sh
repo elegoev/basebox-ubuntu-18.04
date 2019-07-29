@@ -34,19 +34,20 @@ echo "${GREEN}>>>> check vagrant box on vagrant cloud${NC}"
 CLOUDNAMESPACE="elegoev"
 CLOUDCURRENTVERSION=$(vagrant cloud box show $CLOUDNAMESPACE/$BASEBOXNAME | grep current_version | awk  '{print $2}')
 echo "CLOUDCURRENTVERSION = $CLOUDCURRENTVERSION"
-METADATABUILD=$(echo $CLOUDCURRENTVERSION | cut -d'-' -f 2)
+METADATABUILD="$(echo $CLOUDCURRENTVERSION | cut -d'-' -f 2)"
 echo "METADATABUILD = $METADATABUILD"
 echo "Build = $BOXBUILD"
 
-exit 1
-
-if [[ "$BOXBUILD" -ne "$METADATABUILD" ]]; then
+if [ "$BOXBUILD" == "$METADATABUILD" ]; then
   echo "METADATABUILD:                $METADATABUILD"
   echo "${RED}>>>> Image for build $BOXBUILD already deployed${NC}"
   exit 1
 else
   echo "${GREEN}>>>> Create new image for build ${BOXBUILD}${NC}"
 fi
+
+exit 1
+
 
 ### get latest box step
 echo "${GREEN}>>>> get latest basebox${NC}"
