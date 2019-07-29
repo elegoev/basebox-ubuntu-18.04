@@ -5,7 +5,7 @@ BASEBOXNAME=$(vagrant status --machine-readable | grep metadata | cut -d',' -f 2
 echo "BASEBOXNAME = $BASEBOXNAME"
 
 GREEN='\033[0;32m'
-READ='\033[0;31m'
+RED='\033[0;31m'
 NC='\033[0m'
 
 echo -e "${GREEN}>>>> vagrant build started${NC}"
@@ -39,24 +39,32 @@ vagrant box prune
 echo -e "${GREEN}>>>> create metadata${NC}"
 PARENTBOXNAME=$(cat ./provisioning/${BASEBOXNAME}.json | jq -r ".hostvars.vagrant_image")
 PARENTBOXVERSION=$(vagrant box list | grep ${PARENTBOXNAME} |  awk  '{print $3}' | tr --delete ")")
-echo "PARENTBOXNAME:        $PARENTBOXNAME"
-echo "PARENTBOXVERSION:     $PARENTBOXVERSION"
 
 ### check metadata step
 echo -e "${GREEN}>>>> check vagrant box on vagrant cloud${NC}"
 CLOUDNAMESPACE="elegoev"
 CLOUDCURRENTVERSION=$(vagrant cloud box show $CLOUDNAMESPACE/$BASEBOXNAME | grep current_version | awk  '{print $2}')
+CLOUDMETADATA=$(vagrant cloud box show elegoev/ubuntu-18.04 --versions $CLOUDCURRENTVERSION | grep "parentboxversion")
 echo "CLOUDCURRENTVERSION = $CLOUDCURRENTVERSION"
 METADATABUILD="$(echo $CLOUDCURRENTVERSION | cut -d'-' -f 2)"
-echo "METADATABUILD = $METADATABUILD"
-echo "ACTUALBUILD   = $BOXBUILD"
+METADATAPARENTBOXVERSION=$(cat METADATABUILD | jq -r ".parentboxversion")
+echo "PARENTBOXNAME:            $PARENTBOXNAME"
+echo "PARENTBOXVERSION:         $PARENTBOXVERSION"
+echo "METADATAPARENTBOXVERSION: $METADATAPARENTBOXVERSION"
+echo "BUILD:                    $BOXBUILD"
+echo "METADATABUILD:            $METADATABUILD"
 
 if [ "$BOXBUILD" == "$METADATABUILD" ]; then
-  echo -e "${RED}>>>> Image for build $BOXBUILD already deployed${NC}"
-  exit 1
+  if [ "$PARENTBOXVERSION" == "$METADATAPARENTBOXVERSION" ]; then
+     echo -e "${RED}>>>> Image for build $BOXBUILD already deployed${NC}"
+     exit 1
+  else
+    echo -e "${GREEN}>>>> Create new image for parentbox $PARENTBOXNAME (PARENTBOXVERSION) ${NC}"
+  fi
 else
   echo -e "${GREEN}>>>> Create new image for build ${BOXBUILD}${NC}"
 fi
+exit 1
 
 ### create step
 echo -e "${GREEN}>>>> create & provision vagrant box${NC}"
