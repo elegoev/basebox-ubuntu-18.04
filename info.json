@@ -1,0 +1,7 @@
+{
+ "Author": "Urs Voegele",
+ "Repository": "git@github.com:elegoev/vagrant-ubuntu.git",
+ "OS": "Ubuntu",
+ "Description": "vagrant basebox with ubuntu 18.04",
+ "Version Description": "ubuntu 18.04 release update"
+}

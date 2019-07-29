@@ -1,0 +1,12 @@
+{
+  "esxivars":
+  {
+    "esxi_hostname":         "lab-a",
+    "esxi_username":         "root",
+    "esxi_password":         "#password#",
+    "esxi_guest_name":       "lab-dev-vagrant-test",
+    "esxi_disk_storage":     "datastore4",
+    "esxi_guest_mem_size":   "2096",
+    "esxi_guest_numvcpus":   "2"
+   }
+}
