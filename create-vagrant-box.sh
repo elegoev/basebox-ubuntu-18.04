@@ -41,8 +41,6 @@ PARENTBOXNAME=$(cat ./provisioning/${BASEBOXNAME}.json | jq -r ".hostvars.vagran
 PARENTBOXVERSION=$(vagrant box list | grep ${PARENTBOXNAME} |  awk  '{print $3}' | tr --delete ")")
 echo "PARENTBOXNAME:        $PARENTBOXNAME"
 echo "PARENTBOXVERSION:     $PARENTBOXVERSION"
-echo "BOXSHA1HASHCODEVB:    $BOXSHA1HASHCODEVB"
-echo "BOXSHA1HASHCODEESXI:  $BOXSHA1HASHCODEESXI"
 
 ### check metadata step
 echo -e "${GREEN}>>>> check vagrant box on vagrant cloud${NC}"
