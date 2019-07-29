@@ -45,8 +45,8 @@ echo -e "${GREEN}>>>> check vagrant box on vagrant cloud${NC}"
 CLOUDNAMESPACE="elegoev"
 CLOUDCURRENTVERSION=$(vagrant cloud box show $CLOUDNAMESPACE/$BASEBOXNAME | grep current_version | awk  '{print $2}')
 CLOUDMETADATA=$(vagrant cloud box show $CLOUDNAMESPACE/$BASEBOXNAME --versions $CLOUDCURRENTVERSION | grep "parentboxversion")
-echo "METADATA = $CLOUDMETADATA"
-echo "CLOUDCURRENTVERSION = $CLOUDCURRENTVERSION"
+# echo "METADATA = $CLOUDMETADATA"
+# echo "CLOUDCURRENTVERSION = $CLOUDCURRENTVERSION"
 METADATABUILD="$(echo $CLOUDCURRENTVERSION | cut -d'-' -f 2)"
 METADATAPARENTBOXVERSION=$(echo $CLOUDMETADATA | jq -r ".parentboxversion")
 echo "PARENTBOXNAME:            $PARENTBOXNAME"
@@ -65,7 +65,6 @@ if [ "$BOXBUILD" == "$METADATABUILD" ]; then
 else
   echo -e "${GREEN}>>>> Create new image for build ${BOXBUILD}${NC}"
 fi
-exit 1
 
 ### create step
 echo -e "${GREEN}>>>> create & provision vagrant box${NC}"
