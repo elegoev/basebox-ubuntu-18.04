@@ -57,7 +57,7 @@ echo "METADATABUILD:            $METADATABUILD"
 if [ "$BOXBUILD" == "$METADATABUILD" ]; then
   if [ "$PARENTBOXVERSION" == "$METADATAPARENTBOXVERSION" ]; then
      echo -e "${RED}>>>> Image for build $BOXBUILD already deployed${NC}"
-     exit 1
+     exit 0
   else
     echo -e "${GREEN}>>>> Create new image for parentbox $PARENTBOXNAME (PARENTBOXVERSION) ${NC}"
   fi
