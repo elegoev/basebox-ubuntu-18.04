@@ -38,6 +38,8 @@ METADATABUILD=$(echo $CLOUDCURRENTVERSION | cut -d'-' -f 2)
 echo "METADATABUILD = $METADATABUILD"
 echo "Build = $BOXBUILD"
 
+exit 1
+
 if [[ "$BOXBUILD" -ne "$METADATABUILD" ]]; then
   echo "METADATABUILD:                $METADATABUILD"
   echo "${RED}>>>> Image for build $BOXBUILD already deployed${NC}"
