@@ -8,7 +8,7 @@ GREEN='\033[0;32m'
 READ='\033[0;31m'
 NC='\033[0m'
 
-echo "${GREEN}>>>> vagrant build started${NC}"
+echo -e "${GREEN}>>>> vagrant build started${NC}"
 
 # output directory for vagrant box
 BOXDIR="./box-virtualbox"
@@ -30,7 +30,7 @@ echo "BOXFILENAME  $BOXFILENAME"
 echo "BOXDIR:      $BOXDIR"
 
 ### check metadata step
-echo "${GREEN}>>>> check vagrant box on vagrant cloud${NC}"
+echo -e "${GREEN}>>>> check vagrant box on vagrant cloud${NC}"
 CLOUDNAMESPACE="elegoev"
 CLOUDCURRENTVERSION=$(vagrant cloud box show $CLOUDNAMESPACE/$BASEBOXNAME | grep current_version | awk  '{print $2}')
 echo "CLOUDCURRENTVERSION = $CLOUDCURRENTVERSION"
@@ -40,10 +40,10 @@ echo "Build = $BOXBUILD"
 
 if [ "$BOXBUILD" == "$METADATABUILD" ]; then
   echo "METADATABUILD:                $METADATABUILD"
-  echo "${RED}>>>> Image for build $BOXBUILD already deployed${NC}"
+  echo -e "${RED}>>>> Image for build $BOXBUILD already deployed${NC}"
   exit 1
 else
-  echo "${GREEN}>>>> Create new image for build ${BOXBUILD}${NC}"
+  echo -e "${GREEN}>>>> Create new image for build ${BOXBUILD}${NC}"
 fi
 
 exit 1
