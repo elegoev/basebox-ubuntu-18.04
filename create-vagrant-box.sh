@@ -123,12 +123,7 @@ CLOUDBOXPATHVB="$BOXDIR/$BOXFILENAME"
 CLOUDBOXPATHESXI="$ESXIBOXDIR/$BOXFILENAME"
 CLOUDSHORTDESC=$(cat info.json | jq -r ".Description")
 CLOUDDESC=$CLOUDSHORTDESC
-CLOUDVERSIONDESC="$(cat <<EOF
-```json
-{"build":"$BOXBUILD","parentbox":"$PARENTBOXNAME","parentboxversion":"$PARENTBOXVERSION","vbboxsha1hash":"$BOXSHA1HASHCODEVB","esxiboxsha1hash":"$BOXSHA1HASHCODEESXI"}
-```
-EOF
-)"
+CLOUDVERSIONDESC="```json\n{"build":"$BOXBUILD","parentbox":"$PARENTBOXNAME","parentboxversion":"$PARENTBOXVERSION","vbboxsha1hash":"$BOXSHA1HASHCODEVB","esxiboxsha1hash":"$BOXSHA1HASHCODEESXI"}\n```"
 echo "CLOUDVERSIONDESC = $CLOUDVERSIONDESC"
 # publish for provider virtualbox
 echo -e "${GREEN}>>>> publish vagrant box (provider: virtualbox)${NC}"
