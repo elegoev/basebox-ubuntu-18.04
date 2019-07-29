@@ -46,20 +46,17 @@ else
   echo -e "${GREEN}>>>> Create new image for build ${BOXBUILD}${NC}"
 fi
 
-exit 1
-
-
 ### get latest box step
-echo "${GREEN}>>>> get latest basebox${NC}"
+echo -e "${GREEN}>>>> get latest basebox${NC}"
 vagrant box update
-echo "${GREEN}>>>> remove old baseboxes${NC}"
+echo -e "${GREEN}>>>> remove old baseboxes${NC}"
 vagrant box prune
 
 ### create step
-echo "${GREEN}>>>> create & provision vagrant box${NC}"
+echo -e "${GREEN}>>>> create & provision vagrant box${NC}"
 vagrant up
 RETVAL=$?
-if [ $RETVAL -ne 0 ] ; then
+if [[ $RETVAL -ne 0 ]] ; then
     vagrant destroy -f
     exit 1
 fi
@@ -72,7 +69,7 @@ else
 fi
 
 ### export step
-echo "${GREEN}>>>> export vagrant box (provider: virtualbox)${NC}"
+echo -e "${GREEN}>>>> export vagrant box (provider: virtualbox)${NC}"
 vagrant package --base $BASEBOXNAME \
                 --output $BOXDIR/$BOXFILENAME
 mv $BOXDIR/$BOXFILENAME $BOXDIR/$BOXFILENAME.gz
@@ -83,7 +80,7 @@ mv $BOXDIR/$BOXFILENAME.gz $BOXDIR/$BOXFILENAME
 BOXSHA1HASHCODEVB=$(sha1sum $BOXDIR/$BOXFILENAME | awk  '{print $1}')
 
 ### create step for esxi image
-echo "${GREEN}>>>> convert vagrant box (provider: vmware_esxi)${NC}"
+echo -e "${GREEN}>>>> convert vagrant box (provider: vmware_esxi)${NC}"
 ESXIBOXDIR="./box-esxi"
 cp -r $BOXDIR $ESXIBOXDIR
 cd $ESXIBOXDIR
@@ -106,11 +103,11 @@ tar cvf $BOXFILENAME . > /dev/null 2>&1
 gzip $BOXFILENAME
 mv $BOXFILENAME.gz $BOXFILENAME
 cd ..
-echo "Boxfile = $ESXIBOXDIR/$BOXFILENAME"
+echo -e "Boxfile = $ESXIBOXDIR/$BOXFILENAME"
 BOXSHA1HASHCODEESXI=$(sha1sum $ESXIBOXDIR/$BOXFILENAME | awk  '{print $1}')
 
 ### create metadata
-echo "${GREEN}>>>> create metadata${NC}"
+echo -e "${GREEN}>>>> create metadata${NC}"
 PARENTBOXNAME=$(cat ./provisioning/${BASEBOXNAME}.json | jq -r ".hostvars.vagrant_image")
 PARENTBOXVERSION=$(vagrant box list | grep ${PARENTBOXNAME} |  awk  '{print $3}' | tr --delete ")")
 echo "PARENTBOXNAME:        $PARENTBOXNAME"
@@ -119,7 +116,7 @@ echo "BOXSHA1HASHCODEVB:    $BOXSHA1HASHCODEVB"
 echo "BOXSHA1HASHCODEESXI:  $BOXSHA1HASHCODEESXI"
 
 ### publish step
-echo "${GREEN}>>>> start vagrant box publish${NC}"
+echo -e "${GREEN}>>>> start vagrant box publish${NC}"
 CLOUDBOXNAME="$BASEBOXNAME"
 CLOUDBOXVERSION="$BOXVERSION-$BOXBUILD"
 CLOUDBOXPATHVB="$BOXDIR/$BOXFILENAME"
@@ -134,7 +131,7 @@ EOF
 )"
 echo "CLOUDVERSIONDESC = $CLOUDVERSIONDESC"
 # publish for provider virtualbox
-echo "${GREEN}>>>> publish vagrant box (provider: virtualbox)${NC}"
+echo -e "${GREEN}>>>> publish vagrant box (provider: virtualbox)${NC}"
 echo y | vagrant cloud publish "$CLOUDNAMESPACE/$CLOUDBOXNAME" "$CLOUDBOXVERSION" virtualbox "$CLOUDBOXPATHVB" \
                  --description "$CLOUDDESC" \
                  --short-description "$CLOUDSHORTDESC" \
@@ -142,7 +139,7 @@ echo y | vagrant cloud publish "$CLOUDNAMESPACE/$CLOUDBOXNAME" "$CLOUDBOXVERSION
                  --version-description "$CLOUDVERSIONDESC" \
                  --force
 # publish for provider vmware_esxi
-echo "${GREEN}>>>> publish vagrant box (provider: vmware_esxi)${NC}"
+echo -e "${GREEN}>>>> publish vagrant box (provider: vmware_esxi)${NC}"
 echo y | vagrant cloud publish "$CLOUDNAMESPACE/$CLOUDBOXNAME" "$CLOUDBOXVERSION" vmware_esxi "$CLOUDBOXPATHESXI" \
                  --description "$CLOUDDESC" \
                  --short-description "$CLOUDSHORTDESC" \
@@ -151,7 +148,7 @@ echo y | vagrant cloud publish "$CLOUDNAMESPACE/$CLOUDBOXNAME" "$CLOUDBOXVERSION
                  --force
 
 ### destroy step
-echo "${GREEN}>>>> destroy vagrant basebox${NC}"
+echo -e "${GREEN}>>>> destroy vagrant basebox${NC}"
 vagrant destroy -f
 
-echo "${GREEN}>>>> vagrant build finished${NC}"
+echo -e "${GREEN}>>>> vagrant build finished${NC}"
