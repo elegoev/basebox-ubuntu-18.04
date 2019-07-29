@@ -19,7 +19,7 @@ else
   mkdir $BOXDIR
 fi
 
-BOXBUILD=$(git rev-parse --short HEAD)
+BOXBUILD="$(git rev-parse --short HEAD)"
 # BOXNAME="$BASEBOXNAME-$BOXVERSION"
 BOXNAME="$BASEBOXNAME"
 BOXFILENAME="$BOXNAME-$BOXBUILD.box"
