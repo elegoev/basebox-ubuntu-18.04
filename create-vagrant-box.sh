@@ -44,10 +44,11 @@ PARENTBOXVERSION=$(vagrant box list | grep ${PARENTBOXNAME} |  awk  '{print $3}'
 echo -e "${GREEN}>>>> check vagrant box on vagrant cloud${NC}"
 CLOUDNAMESPACE="elegoev"
 CLOUDCURRENTVERSION=$(vagrant cloud box show $CLOUDNAMESPACE/$BASEBOXNAME | grep current_version | awk  '{print $2}')
-CLOUDMETADATA=$(vagrant cloud box show elegoev/ubuntu-18.04 --versions $CLOUDCURRENTVERSION | grep "parentboxversion")
+CLOUDMETADATA=$(vagrant cloud box show $CLOUDNAMESPACE/$BASEBOXNAME --versions $CLOUDCURRENTVERSION | grep "parentboxversion")
+echo "METADATA = $CLOUDMETADATA"
 echo "CLOUDCURRENTVERSION = $CLOUDCURRENTVERSION"
 METADATABUILD="$(echo $CLOUDCURRENTVERSION | cut -d'-' -f 2)"
-METADATAPARENTBOXVERSION=$(cat METADATABUILD | jq -r ".parentboxversion")
+METADATAPARENTBOXVERSION=$(cat $CLOUDMETADATA | jq -r ".parentboxversion")
 echo "PARENTBOXNAME:            $PARENTBOXNAME"
 echo "PARENTBOXVERSION:         $PARENTBOXVERSION"
 echo "METADATAPARENTBOXVERSION: $METADATAPARENTBOXVERSION"
