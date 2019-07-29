@@ -5,7 +5,7 @@ pipeline {
       steps {
         echo 'Build vagrant base boxes ubuntu-18.04'
         sh '   pwd'
-        sh 'create-vagrant-box.sh  '
+        sh 'cat create-vagrant-box.sh  | sh'
         cleanWs(deleteDirs: true)
       }
     }
