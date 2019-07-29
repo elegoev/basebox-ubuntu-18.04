@@ -29,6 +29,21 @@ echo "BOXBUILD:    $BOXBUILD"
 echo "BOXFILENAME  $BOXFILENAME"
 echo "BOXDIR:      $BOXDIR"
 
+### get latest box step
+echo -e "${GREEN}>>>> get latest basebox${NC}"
+vagrant box update
+echo -e "${GREEN}>>>> remove old baseboxes${NC}"
+vagrant box prune
+
+### create metadata
+echo -e "${GREEN}>>>> create metadata${NC}"
+PARENTBOXNAME=$(cat ./provisioning/${BASEBOXNAME}.json | jq -r ".hostvars.vagrant_image")
+PARENTBOXVERSION=$(vagrant box list | grep ${PARENTBOXNAME} |  awk  '{print $3}' | tr --delete ")")
+echo "PARENTBOXNAME:        $PARENTBOXNAME"
+echo "PARENTBOXVERSION:     $PARENTBOXVERSION"
+echo "BOXSHA1HASHCODEVB:    $BOXSHA1HASHCODEVB"
+echo "BOXSHA1HASHCODEESXI:  $BOXSHA1HASHCODEESXI"
+
 ### check metadata step
 echo -e "${GREEN}>>>> check vagrant box on vagrant cloud${NC}"
 CLOUDNAMESPACE="elegoev"
@@ -45,12 +60,6 @@ if [ "$BOXBUILD" == "$METADATABUILD" ]; then
 else
   echo -e "${GREEN}>>>> Create new image for build ${BOXBUILD}${NC}"
 fi
-
-### get latest box step
-echo -e "${GREEN}>>>> get latest basebox${NC}"
-vagrant box update
-echo -e "${GREEN}>>>> remove old baseboxes${NC}"
-vagrant box prune
 
 ### create step
 echo -e "${GREEN}>>>> create & provision vagrant box${NC}"
@@ -106,15 +115,6 @@ cd ..
 echo -e "Boxfile = $ESXIBOXDIR/$BOXFILENAME"
 BOXSHA1HASHCODEESXI=$(sha1sum $ESXIBOXDIR/$BOXFILENAME | awk  '{print $1}')
 
-### create metadata
-echo -e "${GREEN}>>>> create metadata${NC}"
-PARENTBOXNAME=$(cat ./provisioning/${BASEBOXNAME}.json | jq -r ".hostvars.vagrant_image")
-PARENTBOXVERSION=$(vagrant box list | grep ${PARENTBOXNAME} |  awk  '{print $3}' | tr --delete ")")
-echo "PARENTBOXNAME:        $PARENTBOXNAME"
-echo "PARENTBOXVERSION:     $PARENTBOXVERSION"
-echo "BOXSHA1HASHCODEVB:    $BOXSHA1HASHCODEVB"
-echo "BOXSHA1HASHCODEESXI:  $BOXSHA1HASHCODEESXI"
-
 ### publish step
 echo -e "${GREEN}>>>> start vagrant box publish${NC}"
 CLOUDBOXNAME="$BASEBOXNAME"
@@ -123,7 +123,15 @@ CLOUDBOXPATHVB="$BOXDIR/$BOXFILENAME"
 CLOUDBOXPATHESXI="$ESXIBOXDIR/$BOXFILENAME"
 CLOUDSHORTDESC=$(cat info.json | jq -r ".Description")
 CLOUDDESC=$CLOUDSHORTDESC
-CLOUDVERSIONDESC="{"build":"$BOXBUILD","parentbox":"$PARENTBOXNAME","parentboxversion":"$PARENTBOXVERSION","vbboxsha1hash":"$BOXSHA1HASHCODEVB","esxiboxsha1hash":"$BOXSHA1HASHCODEESXI"}"
+DESCMARKUPPREFIX=$"\`\`\`json"
+DESCMARKUPPOSTFIX=$"\`\`\`"
+CLOUDVERSIONDESC=$(cat <<EOF
+${DESCMARKUPPREFIX}
+{"build":"$BOXBUILD","parentbox":"$PARENTBOXNAME","parentboxversion":"$PARENTBOXVERSION","vbboxsha1hash":"$BOXSHA1HASHCODEVB","esxiboxsha1hash":"$BOXSHA1HASHCODEESXI"}
+${DESCMARKUPPOSTFIX}
+EOF
+)
+
 echo "CLOUDVERSIONDESC = $CLOUDVERSIONDESC"
 # publish for provider virtualbox
 echo -e "${GREEN}>>>> publish vagrant box (provider: virtualbox)${NC}"
