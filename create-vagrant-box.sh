@@ -133,6 +133,12 @@ echo y | vagrant cloud publish "$CLOUDNAMESPACE/$CLOUDBOXNAME" "$CLOUDBOXVERSION
                  --release \
                  --version-description "$CLOUDVERSIONDESC" \
                  --force
+RETVAL=$?
+if [[ $RETVAL -ne 0 ]] ; then
+   vagrant destroy -f
+   exit 1
+fi
+
 # publish for provider vmware_esxi
 echo -e "${GREEN}>>>> publish vagrant box (provider: vmware_esxi)${NC}"
 echo y | vagrant cloud publish "$CLOUDNAMESPACE/$CLOUDBOXNAME" "$CLOUDBOXVERSION" vmware_esxi "$CLOUDBOXPATHESXI" \
@@ -141,6 +147,11 @@ echo y | vagrant cloud publish "$CLOUDNAMESPACE/$CLOUDBOXNAME" "$CLOUDBOXVERSION
                  --release \
                  --version-description "$CLOUDVERSIONDESC" \
                  --force
+RETVAL=$?
+if [[ $RETVAL -ne 0 ]] ; then
+      vagrant destroy -f
+      exit 1
+fi
 
 ### destroy step
 echo -e "${GREEN}>>>> destroy vagrant basebox${NC}"
