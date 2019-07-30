@@ -1,11 +1,45 @@
 ## ubuntu-18.04
 Vagrant Box with Ubuntu 18.04
 
-#### Base image
+### Base image
 Used base image [bento/ubuntu-18.04](https://app.vagrantup.com/bento/boxes/ubuntu-18.04)
 
-#### Automatic provisioning
+### Automatic provisioning
 The base image is provisioned with bash script [ubuntu-18.04.sh](https://github.com/elegoev/vagrant-ubuntu1804/blob/master/provisioning/ubuntu-18.04.sh)
+
+###  Create Vagrant Box Environment
+#### Provider "virtualbox"
+1. Create directory `mkdir "name of directory"`
+1. Goto directory `cd "name of directory"`
+1. Create Vagrantfile `vagarnt init "elegoev/ubuntu-18.04"`
+1. Start vagrant box `vagrant up`
+
+#### Provider "vmware_esxi"
+1. Create directory `mkdir "name of directory"`
+1. Goto directory `cd "name of directory"`
+1. Download basebox `vagrant box add "elegoev/ubuntu-18.04" --provider vmware_esxi`
+1. Create Vagrantfile `vagrant init "elegoev/ubuntu-18.04"`
+1. Create file `metadata.json`
+```json
+{
+    "provider": "vmware_esxi"
+}
+```
+1. Create `box.json` with `vagrant up --provider vmware_esxi`
+1. Edit `box.json`
+```json
+{
+  "esxi_hostname": "esxi hostname",
+  "esxi_username": "username to access esxi host",
+  "esxi_password": "password",
+  "esxi_guest_name": "name of guest vm",
+  "esxi_disk_storage": "name of datastore",
+  "esxi_guest_mem_size": "mem size",
+  "esxi_guest_numvcpus": "number of vcpus"
+}
+```
+1. Start vagrant box `vagrant up --provider vmware_esxi`
+
 
 ### Versioning
 Repository follows sematic versioning  [![](https://img.shields.io/badge/semver-2.0.0-green.svg)](http://semver.org)
