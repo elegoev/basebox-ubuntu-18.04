@@ -2,7 +2,7 @@ pipeline {
   agent any
   triggers {
        // poll repo every 5 minute for changes
-       pollSCM('*/5 * * * *')
+       // pollSCM('*/5 * * * *')
   }
   stages {
     stage('create basebox') {
