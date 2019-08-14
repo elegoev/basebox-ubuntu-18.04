@@ -1,6 +1,6 @@
 .DS_Store
 .vagrant
-version/
+version
 deploy2*.ps1
 ansible-epr-inf/
 rolesfromgalaxy/
