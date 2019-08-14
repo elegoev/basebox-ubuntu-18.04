@@ -1,5 +1,6 @@
 .DS_Store
 .vagrant
+version/
 deploy2*.ps1
 ansible-epr-inf/
 rolesfromgalaxy/
@@ -10,5 +11,5 @@ ovf/
 backup/
 box/
 rspec_html_reports/
-version
+
 
