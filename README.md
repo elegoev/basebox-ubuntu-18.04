@@ -5,7 +5,7 @@ Vagrant Box with Ubuntu 18.04
 Used base image [bento/ubuntu-18.04](https://app.vagrantup.com/bento/boxes/ubuntu-18.04)
 
 ### Automatic provisioning
-The base image is provisioned with bash script [ubuntu-18.04.sh](https://github.com/elegoev/vagrant-ubuntu1804/blob/master/provisioning/ubuntu-18.04.sh)
+The base image is provisioned with bash script [ubuntu-18.04.sh](https://github.com/elegoev/basebox-ubuntu-18.04/blob/master/provisioning/ubuntu-18.04.sh)
 
 ### References
 - [Used Vagrantfile for Basebox](https://github.com/elegoev/vagrant-ubuntu-18.04/blob/master/jenkins/vagrant/esxi/_Vagrantfile)
