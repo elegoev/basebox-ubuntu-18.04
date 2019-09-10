@@ -22,25 +22,9 @@ The base image is provisioned with bash script [ubuntu-18.04.sh](https://github.
 1. Goto directory `cd "name of directory"`
 1. Download basebox `vagrant box add "elegoev/ubuntu-18.04" --provider vmware_esxi`
 1. Create Vagrantfile `vagrant init "elegoev/ubuntu-18.04"`
-1. Create file `metadata.json`
-```json
-{
-    "provider": "vmware_esxi"
-}
-```
+1. Create file [`metadata.json`](https://github.com/elegoev/vagrant-ubuntu-18.04/blob/master/jenkins/vagrant/metadata.json.tpl)
 1. Create `box.json` with `vagrant up --provider vmware_esxi`
-1. Edit `box.json`
-```json
-{
-  "esxi_hostname": "esxi hostname",
-  "esxi_username": "username to access esxi host",
-  "esxi_password": "password",
-  "esxi_guest_name": "name of guest vm",
-  "esxi_disk_storage": "name of datastore",
-  "esxi_guest_mem_size": "mem size",
-  "esxi_guest_numvcpus": "number of vcpus"
-}
-```
+1. Edit [`box.json`](https://github.com/elegoev/vagrant-ubuntu-18.04/blob/master/jenkins/vagrant/box.json.tpl)
 1. Start vagrant box `vagrant up --provider vmware_esxi`
 
 
