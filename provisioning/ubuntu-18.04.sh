@@ -14,4 +14,4 @@ DATE=`date +%Y%m%d%H%M`
 
 # set version
 UBUNTU_VERSION=$(lsb_release -a | grep Release | awk  '{print $2}')
-echo "$UBUNTU_VERSION.$DATE" > /vagrant/version
+echo "ubuntu-$UBUNTU_VERSION" > /vagrant/version
