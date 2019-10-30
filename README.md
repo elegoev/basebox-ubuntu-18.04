@@ -7,6 +7,15 @@ Used base image [bento/ubuntu-18.04](https://app.vagrantup.com/bento/boxes/ubunt
 ### Automatic provisioning
 The base image is provisioned with bash script [ubuntu-18.04.sh](https://github.com/elegoev/basebox-ubuntu-18.04/blob/master/provisioning/ubuntu-18.04.sh)
 
+### Configuration
+#### Required Vagrant Plugins
+- vagrant-disksize
+- vagrant-hosts
+- vagrant-secret
+- vagrant-share
+- vagrant-vbguest
+- vagrant-vmware-esxi
+
 ###  Create Vagrant Box Environment
 #### Provider "virtualbox"
 1. Create directory `mkdir "name of directory"`
