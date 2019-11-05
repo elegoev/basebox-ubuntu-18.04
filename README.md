@@ -35,7 +35,6 @@ The base image is provisioned with bash script [ubuntu-18.04.sh](https://github.
 1. Copy and edit [`box.json`](https://github.com/elegoev/vagrant-ubuntu-18.04-images/blob/master/jenkins/vagrant/box.json)
 1. Start vagrant box `vagrant up --provider vmware_esxi`
 
-
 ### Versioning
 Repository follows sematic versioning  [![](https://img.shields.io/badge/semver-2.0.0-green.svg)](http://semver.org)
 
