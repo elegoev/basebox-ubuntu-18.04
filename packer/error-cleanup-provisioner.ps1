@@ -11,3 +11,8 @@ Pop-Location
 # call cleanup
 Write-Host "$PSScriptRoot\post-processors\cleanup.ps1"
 Invoke-Expression "$PSScriptRoot\post-processors\cleanup.ps1"
+
+# write error box
+Write-Host "############################" -ForegroundColor Red
+Write-Host "Baseimage build failed      " -ForegroundColor Red
+Write-Host "############################" -ForegroundColor Red
