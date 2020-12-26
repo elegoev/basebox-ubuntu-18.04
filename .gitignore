@@ -2,14 +2,8 @@
 .vagrant
 version
 deploy2*.ps1
-ansible-epr-inf/
-rolesfromgalaxy/
-rolesfromgitlab/
-files-trans/
-shared_files/
-ovf/
-backup/
-box/
+*.log
 rspec_html_reports/
+inspec_html_report/
 
 

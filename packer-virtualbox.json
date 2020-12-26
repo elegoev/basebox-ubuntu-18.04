@@ -1,0 +1,40 @@
+{
+  "builders": [
+    {
+      "communicator": "ssh",
+      "source_path": "ubuntu/bionic64",
+      "output_dir": "packer_build_dir",
+      "box_name": "basebox-ubuntu-18.04",
+      "provider": "virtualbox",
+      "package_include": "info.json",
+      "add_force": true,
+      "type": "vagrant"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "./packer/provisioners/base-provisioning.sh"
+    },
+    {
+      "type": "inspec",
+      "inspec_env_vars": [ "CHEF_LICENSE=accept"],
+      "extra_arguments": [ "--reporter", "cli", "html2:./inspec_html_report/linux_baseline_report.html" ],
+      "profile": "https://github.com/dev-sec/linux-baseline"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "shell-local",
+      "execute_command": ["powershell.exe", "{{.Vars}} {{.Script}}"],
+      "env_var_format": "$env:%s=\"%s\"; ",
+      "script": "./packer/post-processors/cleanup.ps1"  
+    }
+  ],
+  "error-cleanup-provisioner": {
+    "type": "shell-local",
+    "execute_command": ["powershell.exe", "{{.Vars}} {{.Script}}"],
+    "env_var_format": "$env:%s=\"%s\"; ",
+    "script": "./packer/error-cleanup-provisioner.ps1"  
+  }
+}
