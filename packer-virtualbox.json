@@ -1,10 +1,15 @@
 {
+  "variables": {
+    "image_name": "ubuntu-18.04",
+    "image_version": "2.0.{{timestamp}}",
+    "cloud_token": "{{ env `PACKER_VAGRANTCLOUD_TOKEN` }}"
+  },
   "builders": [
     {
       "communicator": "ssh",
       "source_path": "ubuntu/bionic64",
       "output_dir": "packer_build_dir",
-      "box_name": "basebox-ubuntu-18.04",
+      "box_name": "basebox-{{user `image_name`}}",
       "provider": "virtualbox",
       "package_include": "info.json",
       "add_force": true,
@@ -19,11 +24,32 @@
     {
       "type": "inspec",
       "inspec_env_vars": [ "CHEF_LICENSE=accept"],
-      "extra_arguments": [ "--reporter", "cli", "html2:./inspec_html_report/linux_baseline_report.html" ],
-      "profile": "https://github.com/dev-sec/linux-baseline"
+      "extra_arguments": [ "--reporter", "cli", "html2:./inspec/inspec_html_report/baseline-{{user `image_name`}}_report.html" ],
+      "profile": "./inspec/baseline-ubuntu-18.04"
     }
   ],
   "post-processors": [
+    {
+      "type": "shell-local",
+      "environment_vars": ["IMAGE_NAME={{user `image_name`}}"],
+      "execute_command": ["powershell.exe", "{{.Vars}} {{.Script}}"],
+      "env_var_format": "$env:%s=\"%s\"; ",
+      "script": "./packer/post-processors/vagrant-cloud-create-box.ps1"  
+    },
+    {
+      "type": "shell-local",
+      "environment_vars": ["IMAGE_VERSION={{user `image_version`}}"],
+      "execute_command": ["powershell.exe", "{{.Vars}} {{.Script}}"],
+      "env_var_format": "$env:%s=\"%s\"; ",
+      "script": "./packer/post-processors/create-git-tag.ps1"  
+    },
+    {
+      "type": "vagrant-cloud",
+      "box_tag": "elegoev/{{user `image_name`}}",
+      "version": "{{user `image_version`}}",
+      "version_description": "",
+      "access_token": "{{user `cloud_token`}}"
+    },
     {
       "type": "shell-local",
       "execute_command": ["powershell.exe", "{{.Vars}} {{.Script}}"],
