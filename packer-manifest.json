@@ -1,0 +1,19 @@
+{
+  "builds": [
+    {
+      "name": "vagrant",
+      "builder_type": "vagrant",
+      "build_time": 1609064101,
+      "files": [
+        {
+          "name": "packer_build_dir\\package.box",
+          "size": 634863172
+        }
+      ],
+      "artifact_id": "virtualbox",
+      "packer_run_uuid": "3aa7d906-e81d-f493-e6cd-e0d945b54249",
+      "custom_data": null
+    }
+  ],
+  "last_run_uuid": "3aa7d906-e81d-f493-e6cd-e0d945b54249"
+}

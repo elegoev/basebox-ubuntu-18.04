@@ -30,6 +30,9 @@
   ],
   "post-processors": [
     {
+      "type": "manifest"
+    },
+    {
       "type": "shell-local",
       "environment_vars": ["IMAGE_NAME={{user `image_name`}}"],
       "execute_command": ["powershell.exe", "{{.Vars}} {{.Script}}"],
