@@ -30,9 +30,6 @@
   ],
   "post-processors": [
     {
-      "type": "manifest"
-    },
-    {
       "type": "shell-local",
       "environment_vars": ["IMAGE_NAME={{user `image_name`}}"],
       "execute_command": ["powershell.exe", "{{.Vars}} {{.Script}}"],
@@ -50,7 +47,7 @@
       "type": "vagrant-cloud",
       "box_tag": "elegoev/{{user `image_name`}}",
       "version": "{{user `image_version`}}",
-      "version_description": "",
+      "version_description": "***[[github info]](https://github.com/elegoev/basebox-ubuntu-18.04/tree/{{user `image_version`}})[[inspec report]](https://htmlpreview.github.io/?https://github.com/elegoev/basebox-ubuntu-18.04/blob/{{user `image_version`}}/inspec/inspec_html_report/baseline-ubuntu-18.04_report.html)][[basebox bionic64]](https://app.vagrantup.com/ubuntu/boxes/bionic64)",
       "access_token": "{{user `cloud_token`}}"
     },
     {
