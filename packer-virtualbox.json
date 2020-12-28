@@ -1,5 +1,7 @@
 {
   "variables": {
+    "src_image_name": "ubuntu/bionic64",
+    "src_image_version": "20201211.1.0",
     "image_name": "ubuntu-18.04",
     "image_version": "2.0.{{timestamp}}",
     "cloud_token": "{{ env `PACKER_VAGRANTCLOUD_TOKEN` }}"
@@ -7,7 +9,8 @@
   "builders": [
     {
       "communicator": "ssh",
-      "source_path": "ubuntu/bionic64",
+      "source_path": "{{user `src_image_name`}}",
+      "box_version": "{{user `src_image_version`}}",
       "output_dir": "packer_build_dir",
       "box_name": "basebox-{{user `image_name`}}",
       "provider": "virtualbox",
@@ -47,7 +50,7 @@
       "type": "vagrant-cloud",
       "box_tag": "elegoev/{{user `image_name`}}",
       "version": "{{user `image_version`}}",
-      "version_description": "***[[github info]](https://github.com/elegoev/basebox-ubuntu-18.04/tree/{{user `image_version`}})[[inspec report]](https://htmlpreview.github.io/?https://github.com/elegoev/basebox-ubuntu-18.04/blob/{{user `image_version`}}/inspec/inspec_html_report/baseline-ubuntu-18.04_report.html)][[basebox bionic64]](https://app.vagrantup.com/ubuntu/boxes/bionic64)",
+      "version_description": "***\n[[github info]](https://github.com/elegoev/basebox-ubuntu-18.04/tree/{{user `image_version`}})[[inspec report]](https://htmlpreview.github.io/?https://github.com/elegoev/basebox-ubuntu-18.04/blob/{{user `image_version`}}/inspec/inspec_html_report/baseline-ubuntu-18.04_report.html)[[basebox bionic64]](https://app.vagrantup.com/ubuntu/boxes/bionic64/versions/{{user `src_image_version`}})",
       "access_token": "{{user `cloud_token`}}"
     },
     {
