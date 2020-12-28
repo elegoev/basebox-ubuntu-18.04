@@ -1,17 +1,17 @@
-## ubuntu-18.04
+# ubuntu-18.04
 
 Vagrant Box with Ubuntu 18.04
 
-### Base image
+## Base image
 
-Used base image [bento/ubuntu-18.04](https://app.vagrantup.com/bento/boxes/ubuntu-18.04)
+Used base image [ubuntu/bionic64](https://app.vagrantup.com/ubuntu/boxes/bionic64)
 
-### Automatic provisioning
+## Configuration
 
-The base image is provisioned with bash script [ubuntu-18.04.sh](https://github.com/elegoev/basebox-ubuntu-18.04/blob/master/provisioning/ubuntu-18.04.sh)
+### Vagrant Cloud
 
-### Configuration
-#### Required Vagrant Plugins
+[elegoev/ubuntu-18.04](https://app.vagrantup.com/elegoev/boxes/ubuntu-18.04)
+### Useful Vagrant Plugins
 
 - vagrant-disksize
 - vagrant-hosts
@@ -19,27 +19,6 @@ The base image is provisioned with bash script [ubuntu-18.04.sh](https://github.
 - vagrant-share
 - vagrant-vbguest
 - vagrant-vmware-esxi
-
-###  Create Vagrant Box Environment
-#### Provider "virtualbox"
-
-1. Create directory `mkdir "name of directory"`
-1. Goto directory `cd "name of directory"`
-1. Create Vagrantfile `Vagrantfilent init "elegoev/ubuntu-18.04"`
-1. Start vagrant box `vagrant up`
-
-#### Provider "vmware_esxi"
-
-1. Create directory `mkdir "name of directory"`
-1. Goto directory `cd "name of directory"`
-1. Download basebox `vagrant box add "elegoev/ubuntu-18.04" --provider vmware_esxi`
-1. Create secret file `.vagrant/secret.yaml`
-   - add `esxi_username: "<ESXi root username"`
-   - add `esxi_password: "<ESXi root password"`
-1. Create [Vagrantfile](https://github.com/elegoev/vagrant-ubuntu-18.04-images/blob/master/jenkins/vagrant/Vagrantfile.tpl)
-1. Create file [`metadata.json`](https://github.com/elegoev/vagrant-ubuntu-18.04-images/blob/master/jenkins/vagrant/metadata.json.tpl)
-1. Copy and edit [`box.json`](https://github.com/elegoev/vagrant-ubuntu-18.04-images/blob/master/jenkins/vagrant/box.json)
-1. Start vagrant box `vagrant up --provider vmware_esxi`
 
 ### Versioning
 
