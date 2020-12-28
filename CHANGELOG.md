@@ -11,3 +11,4 @@
 **Implemented enhancements:**
 
 - Build process migrated to packer
+- Base image migrated to `ubuntu/bionic64`

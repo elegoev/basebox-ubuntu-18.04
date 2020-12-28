@@ -10,7 +10,8 @@ Used base image [ubuntu/bionic64](https://app.vagrantup.com/ubuntu/boxes/bionic6
 
 ### Vagrant Cloud
 
-[elegoev/ubuntu-18.04](https://app.vagrantup.com/elegoev/boxes/ubuntu-18.04)
+- [elegoev/ubuntu-18.04](https://app.vagrantup.com/elegoev/boxes/ubuntu-18.04)
+
 ### Useful Vagrant Plugins
 
 - [vagrant-disksize](https://github.com/sprotheroe/vagrant-disksize)
