@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
     $src_image_version="20201211.1.0"
 
     scriptlist = Array[]
-    scriptlist = Dir.glob("../packer/provisioners/*").sort    
+    scriptlist = Dir.glob("../../packer/provisioners/*").sort    
 
     config.vm.define "#{$basebox_name}" do |machine|
       machine.vm.box = "#{$src_image_name}"
