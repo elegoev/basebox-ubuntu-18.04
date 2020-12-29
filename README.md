@@ -6,6 +6,14 @@ Vagrant Box with Ubuntu 18.04
 
 Used base image [ubuntu/bionic64](https://app.vagrantup.com/ubuntu/boxes/bionic64)
 
+## Directory Description
+
+| directory | description                                          |
+|-----------|------------------------------------------------------|
+| inspec    | inspec test profiles with controls                   |
+| packer    | packer build, provisioner and post-processor scripts |
+| test      | test environment for provision & inspec development  |
+
 ## Configuration
 
 ### Vagrant Cloud
@@ -21,9 +29,11 @@ Used base image [ubuntu/bionic64](https://app.vagrantup.com/ubuntu/boxes/bionic6
 - [vagrant-serverspec](https://github.com/vvchik/vagrant-serverspec)
 - [vagrant-vmware-esxi](https://github.com/josenk/vagrant-vmware-esxi)
 
+## Basebox Development
+
 ### Versioning
 
-Repository follows sematic versioning  [![](https://img.shields.io/badge/semver-2.0.0-green.svg)](http://semver.org)
+Repository follows sematic versioning  [![semantic versioning](https://img.shields.io/badge/semver-2.0.0-green.svg)](http://semver.org)
 
 ### Changelog
 

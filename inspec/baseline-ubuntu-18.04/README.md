@@ -1,3 +1,3 @@
-# Example InSpec Profile
+# Inspec `baseline-ubuntu-18.04` Profile
 
-This example shows the implementation of an InSpec profile.
+Inspec profile for basebox-ubuntu-18.04
