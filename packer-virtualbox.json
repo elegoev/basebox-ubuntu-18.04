@@ -14,7 +14,6 @@
       "output_dir": "packer_build_dir",
       "box_name": "basebox-{{user `image_name`}}",
       "provider": "virtualbox",
-      "package_include": "info.json",
       "add_force": true,
       "type": "vagrant"
     }
