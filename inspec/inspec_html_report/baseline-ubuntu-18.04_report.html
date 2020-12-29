@@ -220,7 +220,7 @@ function  pageLoaded() {
   <h2 class="profile_title">Profile profile for vagrant image baseline-ubuntu-18.04 (baseline-ubuntu-18.04)</h2>
 
   <table class="profile-metadata info" id="profile-metadata-baseline-ubuntu-18.04">
-    <tr class="profile-version"><th>Version:</th><td>0.1.0</td></tr>
+    <tr class="profile-version"><th>Version:</th><td>1.0.0</td></tr>
     
     <tr class="profile-summary"><th>Summary:</th><td>vagrant baseline checks</td></tr>
     
@@ -233,55 +233,6 @@ function  pageLoaded() {
       
 
 
-<div class="control control-status-passed" id="control-(generated_from_check_tmp_dir.rb:6_672db4b52013b3b8bf51e83d909880ba)">
-
-  
-
-  <h3 class="control-title">Control <code>(generated from check_tmp_dir.rb:6 672db4b52013b3b8bf51e83d909880ba)</code></h3>
-  <table class="control-metadata info" id="control-metadata-(generated_from_check_tmp_dir.rb:6_672db4b52013b3b8bf51e83d909880ba)">
-    <tr class="status status-passed"><th>Status:</th><td><div>Passed</div></td></tr>
-    
-    
-    <tr class="impact impact-medium"><th>Impact:</th><td>0.5</td></tr> 
-    
-    
-    <tr class="code">
-      <th>Source Code:</th>
-      <td>
-        <input type="button" class="show-source-code" id="show-code-(generated_from_check_tmp_dir.rb:6_672db4b52013b3b8bf51e83d909880ba)" value="Show Source"/>
-        <input type="button" class="hide-source-code hidden" id="hide-code-(generated_from_check_tmp_dir.rb:6_672db4b52013b3b8bf51e83d909880ba)" value="Hide Source"/>
-        <pre class="source-code hidden" id="source-code-(generated_from_check_tmp_dir.rb:6_672db4b52013b3b8bf51e83d909880ba)">
-          <code>
-
-          </code>
-        </pre>
-      </td>
-    </tr>
-  <!-- TODO waiver data -->
-
-  </table>
-
-  
-    
-<div class="result" id="result-File__tmp">
-  <h4 class="resource-title">Resource <code>File /tmp</code></h4>
-  <table class="result-metadata info">
-    <tr class="expectation_message"><th>Test:</th><td><code>is expected to be directory</code></td></tr>
-    <tr class="status status-passed"><th>Status:</th><td><div>Passed</div></td></tr>
-    
-    
-    <tr class="duration"><th>Duration:</th><td>0.1071809 seconds</td></tr>
-  </table>
-</div>
-
-  
-
-</div>
-
-    
-      
-
-
 <div class="control control-status-passed" id="control-tmp-1.0">
 
   
@@ -290,7 +241,7 @@ function  pageLoaded() {
   <table class="control-metadata info" id="control-metadata-tmp-1.0">
     <tr class="status status-passed"><th>Status:</th><td><div>Passed</div></td></tr>
     <tr class="title"><th>Title:</th><td>Create /tmp directory</td></tr> 
-    <tr class="desc"><th>Description:</th><td>An optional description...</td></tr> 
+    <tr class="desc"><th>Description:</th><td>Create /tmp directory</td></tr> 
     <tr class="impact impact-high"><th>Impact:</th><td>0.7</td></tr> 
     
     
@@ -304,7 +255,7 @@ function  pageLoaded() {
 control "tmp-1.0" do                        # A unique ID for this control
   impact 0.7                                # The criticality, if this control fails.
   title "Create /tmp directory"             # A human-readable title
-  desc "An optional description..."
+  desc "Create /tmp directory"
   describe file("/tmp") do                  # The actual test
     it { should be_directory }
   end
@@ -327,7 +278,64 @@ end
     <tr class="status status-passed"><th>Status:</th><td><div>Passed</div></td></tr>
     
     
-    <tr class="duration"><th>Duration:</th><td>0.021934 seconds</td></tr>
+    <tr class="duration"><th>Duration:</th><td>0.0971822 seconds</td></tr>
+  </table>
+</div>
+
+  
+
+</div>
+
+    
+      
+
+
+<div class="control control-status-passed" id="control-user-1.0">
+
+  
+
+  <h3 class="control-title">Control <code>user-1.0</code></h3>
+  <table class="control-metadata info" id="control-metadata-user-1.0">
+    <tr class="status status-passed"><th>Status:</th><td><div>Passed</div></td></tr>
+    <tr class="title"><th>Title:</th><td>check if vagrant user exists</td></tr> 
+    <tr class="desc"><th>Description:</th><td>check vagrant user</td></tr> 
+    <tr class="impact impact-high"><th>Impact:</th><td>1.0</td></tr> 
+    
+    
+    <tr class="code">
+      <th>Source Code:</th>
+      <td>
+        <input type="button" class="show-source-code" id="show-code-user-1.0" value="Show Source"/>
+        <input type="button" class="hide-source-code hidden" id="hide-code-user-1.0" value="Hide Source"/>
+        <pre class="source-code hidden" id="source-code-user-1.0">
+          <code>
+control "user-1.0" do                       # A unique ID for this control
+  impact 1.0                                # The criticality, if this control fails.
+  title "check if vagrant user exists"      # A human-readable title
+  desc "check vagrant user"
+  describe user("vagrant") do               # The actual test
+    it { should exist }
+  end
+end
+
+          </code>
+        </pre>
+      </td>
+    </tr>
+  <!-- TODO waiver data -->
+
+  </table>
+
+  
+    
+<div class="result" id="result-User_vagrant">
+  <h4 class="resource-title">Resource <code>User vagrant</code></h4>
+  <table class="result-metadata info">
+    <tr class="expectation_message"><th>Test:</th><td><code>is expected to exist</code></td></tr>
+    <tr class="status status-passed"><th>Status:</th><td><div>Passed</div></td></tr>
+    
+    
+    <tr class="duration"><th>Duration:</th><td>0.0308432 seconds</td></tr>
   </table>
 </div>
 
@@ -346,15 +354,15 @@ end
         <tr><th colspan=2><h4 id="platform-label">Platform Information</h4></th></tr>
         <tr class= "name"><th>Name:</th><td>ubuntu</td></tr>
         <tr class= "release"><th>Release:</th><td>18.04</td></tr>
-        <tr class= "target"><th>Target:</th><td>ssh://ELEGOEV-1909\cxtla@127.0.0.1:50637</td></tr>
+        <tr class= "target"><th>Target:</th><td>ssh://ELEGOEV-1909\cxtla@127.0.0.1:51920</td></tr>
       </table>
       <table id="statistics" class="info">
         <tr><th colspan="2"><h4 id="statistics-label">Control Statistics</h4></th></tr>
         <tr class= "passed"><th>Passed:</th><td>2</td></tr>
         <tr class= "skipped"><th>Skipped:</th><td>0</td></tr>
         <tr class= "failed"><th>Failed:</th><td>0</td></tr>
-        <tr class= "duration"><th>Duration:</th><td>0.141 seconds</td></tr>
-        <tr class= "date"><th>Time Finished:</th><td>2020-12-28 15:09:23 +0100</td></tr>
+        <tr class= "duration"><th>Duration:</th><td>0.1377183 seconds</td></tr>
+        <tr class= "date"><th>Time Finished:</th><td>2020-12-29 16:18:14 +0100</td></tr>
       </table>
       <span id="inspec-version">Chef InSpec version 4.24.8</span>
     </div>

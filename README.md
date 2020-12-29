@@ -29,8 +29,6 @@ Used base image [ubuntu/bionic64](https://app.vagrantup.com/ubuntu/boxes/bionic6
 - [vagrant-serverspec](https://github.com/vvchik/vagrant-serverspec)
 - [vagrant-vmware-esxi](https://github.com/josenk/vagrant-vmware-esxi)
 
-## Basebox Development
-
 ### Versioning
 
 Repository follows sematic versioning  [![semantic versioning](https://img.shields.io/badge/semver-2.0.0-green.svg)](http://semver.org)
