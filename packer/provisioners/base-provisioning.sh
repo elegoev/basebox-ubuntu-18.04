@@ -12,9 +12,9 @@ sudo unlink /etc/localtime
 sudo ln -s /usr/share/zoneinfo/Europe/Zurich /etc/localtime
 timedatectl
 
-# create date string
-# DATE=`date +%Y%m%d%H%M`
-
 # set version
-# UBUNTU_VERSION=$(lsb_release -a | grep Release | awk  '{print $2}')
-# echo "ubuntu-$UBUNTU_VERSION" > /vagrant/version
+UBUNTU_VERSION=$(lsb_release -a | grep Release | awk  '{print $2}')
+echo "# Installed application "  > $application_file_path
+echo "***                     " >> $application_file_path
+echo "> Ubuntu $UBUNTU_VERSION" >> $application_file_path
+
