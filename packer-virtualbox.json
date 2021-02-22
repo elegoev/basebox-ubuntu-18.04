@@ -4,6 +4,7 @@
     "src_image_version": "20201211.1.0",
     "image_name": "ubuntu-18.04",
     "image_version": "2.0.{{timestamp}}",
+    "vagrant_template": "./packer/files-prov/template/Vagrantfile",
     "cloud_token": "{{ env `PACKER_VAGRANTCLOUD_TOKEN` }}"
   },
   "builders": [
@@ -13,6 +14,7 @@
       "box_version": "{{user `src_image_version`}}",
       "output_dir": "packer_build_dir",
       "box_name": "basebox-{{user `image_name`}}",
+      "template": "{{user `vagrant_template`}}",
       "provider": "virtualbox",
       "add_force": true,
       "type": "vagrant"
