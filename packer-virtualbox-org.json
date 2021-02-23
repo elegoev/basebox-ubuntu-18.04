@@ -4,35 +4,23 @@
     "src_image_version": "20201211.1.0",
     "image_name": "ubuntu-18.04",
     "image_version": "2.0.{{timestamp}}",
-    "cloud_token": "{{ env `PACKER_VAGRANTCLOUD_TOKEN` }}",
-    "inspec_profile": "baseline-ubuntu-18.04",
-    "inspec_report": "/inspec/inspec_html_report/baseline-ubuntu-18.04_report.html",
-    "github_repo": "https://github.com/elegoev/basebox-ubuntu-18.04",
-    "github_repo_version": "{{user `github_repo`}}/tree/{{user `image_version`}}",
-    "github_inspec_report": "{{user `github_repo`}}/blob/{{user `image_version`}}{{user `inspec_report`}}",
     "vagrant_template": "./packer/files-prov/template/Vagrantfile",
-    "vagrantcloud_base_image": "https://app.vagrantup.com/elegoev/boxes/ubuntu-18.04/versions/{{user `src_image_version`}}",
-    "application_info": "https://github.com/elegoev/basebox-ubuntu-18.04/blob/{{user `image_version`}}/installed-application.md"
+    "cloud_token": "{{ env `PACKER_VAGRANTCLOUD_TOKEN` }}"
   },
   "builders": [
     {
-      "type": "vagrant",
       "communicator": "ssh",
       "source_path": "{{user `src_image_name`}}",
       "box_version": "{{user `src_image_version`}}",
       "output_dir": "packer_build_dir",
-      "template": "{{user `vagrant_template`}}",
       "box_name": "basebox-{{user `image_name`}}",
+      "template": "{{user `vagrant_template`}}",
       "provider": "virtualbox",
-      "add_force": true
+      "add_force": true,
+      "type": "vagrant"
     }
   ],
   "provisioners": [
-    {
-      "type": "file",
-      "source": "./packer/files-prov",
-      "destination": "/home/vagrant/files-prov"
-    },
     {
       "type": "shell",
       "script": "./packer/provisioners/base-provisioning.sh"
@@ -40,8 +28,8 @@
     {
       "type": "inspec",
       "inspec_env_vars": [ "CHEF_LICENSE=accept"],
-      "extra_arguments": [ "--reporter", "cli", "html2:.{{user `inspec_report`}}" ],
-      "profile": "./inspec/{{user `inspec_profile`}}"
+      "extra_arguments": [ "--reporter", "cli", "html2:./inspec/inspec_html_report/baseline-{{user `image_name`}}_report.html" ],
+      "profile": "./inspec/baseline-ubuntu-18.04"
     }
   ],
   "post-processors": [
@@ -63,7 +51,7 @@
       "type": "vagrant-cloud",
       "box_tag": "elegoev/{{user `image_name`}}",
       "version": "{{user `image_version`}}",
-      "version_description": "***\n[[github info]]({{user `github_repo_version`}})[[inspec report]](https://htmlpreview.github.io/?{{user `github_inspec_report`}})[[application]]({{user `application_info`}})[[basebox {{user `src_image_name`}}]]({{user `vagrantcloud_base_image`}})",
+      "version_description": "***\n[[github info]](https://github.com/elegoev/basebox-ubuntu-18.04/tree/{{user `image_version`}})[[inspec report]](https://htmlpreview.github.io/?https://github.com/elegoev/basebox-ubuntu-18.04/blob/{{user `image_version`}}/inspec/inspec_html_report/baseline-ubuntu-18.04_report.html)[[basebox bionic64]](https://app.vagrantup.com/ubuntu/boxes/bionic64/versions/{{user `src_image_version`}})",
       "access_token": "{{user `cloud_token`}}"
     },
     {
