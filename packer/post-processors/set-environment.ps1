@@ -8,6 +8,6 @@ if (Test-Path $EnvFileName) {
 
 Set-Content $EnvFileName `
 "
-`$env:SRC_IMAGE_NAME = '$env:IMAGE_NAME'
+`$env:SRC_IMAGE_NAME = 'elegoev/$env:IMAGE_NAME'
 `$env:SRC_IMAGE_VERSION = '$env:IMAGE_VERSION'
 "
