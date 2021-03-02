@@ -49,6 +49,16 @@
     },
     {
       "type": "shell-local",
+      "environment_vars": [
+        "IMAGE_NAME={{user `image_name`}}",
+        "IMAGE_VERSION={{user `image_version`}}"
+       ],
+      "execute_command": ["powershell.exe", "{{.Vars}} {{.Script}}"],
+      "env_var_format": "$env:%s=\"%s\"; ",
+      "script": "./packer/post-processors/set-environment.ps1"  
+    },
+    {
+      "type": "shell-local",
       "environment_vars": ["IMAGE_VERSION={{user `image_version`}}"],
       "execute_command": ["powershell.exe", "{{.Vars}} {{.Script}}"],
       "env_var_format": "$env:%s=\"%s\"; ",
@@ -60,16 +70,6 @@
       "version": "{{user `image_version`}}",
       "version_description": "***\n[[github info]]({{user `github_repo_version`}})[[inspec report]](https://htmlpreview.github.io/?{{user `github_inspec_report`}})[[application]]({{user `application_info`}})[[basebox {{user `src_image_name`}}]]({{user `vagrantcloud_base_image`}})",
       "access_token": "{{user `cloud_token`}}"
-    },
-    {
-      "type": "shell-local",
-      "environment_vars": [
-        "IMAGE_NAME={{user `image_name`}}",
-        "IMAGE_VERSION={{user `image_version`}}"
-       ],
-      "execute_command": ["powershell.exe", "{{.Vars}} {{.Script}}"],
-      "env_var_format": "$env:%s=\"%s\"; ",
-      "script": "./packer/post-processors/set-environment.ps1"  
     },
     {
       "type": "shell-local",
