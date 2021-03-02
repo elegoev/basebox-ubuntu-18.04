@@ -29,11 +29,6 @@
   ],
   "provisioners": [
     {
-      "type": "file",
-      "source": "./packer/files-prov",
-      "destination": "/home/vagrant/files-prov"
-    },
-    {
       "type": "shell",
       "script": "./packer/provisioners/base-provisioning.sh"
     },

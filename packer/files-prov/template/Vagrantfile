@@ -4,16 +4,15 @@ Vagrant.configure("2") do |config|
 	  source.vm.box = "#{ENV["SRC_IMAGE_NAME"]}"
     source.vm.box_version = "#{ENV["SRC_IMAGE_VERSION"]}"
 
-    # source.vm.provider "virtualbox" do |vb|
-    #   vb.name = "basebox-ubuntu-18.04"
-    #   vb.cpus = 2
-    #   vb.customize ["modifyvm", :id, "--memory", "1024" ]
-    #   vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    #   vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-    #   vb.customize ["modifyvm", :id, "--uartmode1", "disconnected" ]
-    #   vb.customize ["modifyvm", :id, "--groups", "/basebox-build" ]
-    #   vb.customize ["modifyvm", :id, "--vram", 256 ]
-    # end
+    source.vm.provider "virtualbox" do |vb|
+      vb.name = "basebox-ubuntu-18.04"
+      vb.cpus = 2
+      vb.customize ["modifyvm", :id, "--memory", "1024" ]
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      vb.customize ["modifyvm", :id, "--groups", "/basebox-build" ]
+      vb.customize ["modifyvm", :id, "--vram", 256 ]
+    end
 
 	  config.ssh.insert_key = {{.InsertKey}}
   end
