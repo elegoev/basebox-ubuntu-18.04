@@ -30,6 +30,7 @@
   "provisioners": [
     {
       "type": "shell",
+      "execute_command": "sudo -S sh -c '{{ .Vars }} {{ .Path }}'",
       "script": "./packer/provisioners/base-provisioning.sh"
     },
     {
