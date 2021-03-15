@@ -1,6 +1,6 @@
 # environment task
 
-# creaze
+# create environment file
 $EnvFileName = '.\set-build-env.ps1'
 if (Test-Path $EnvFileName) {
   Remove-Item $EnvFileName
